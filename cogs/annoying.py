@@ -3,9 +3,10 @@ import re
 from discord.ext import commands
 """
 this cog is good for some servers but in general you might wanna
-drop some memes and yeah have fun
+drop some memes and yeah have fun, and don't ping the bot it doesn't
+like it that way ok
 """
-class Antilink(): # it all makes sense now
+class Annoying(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._link_regex = re.compile(r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+') # is a link? 
@@ -25,6 +26,11 @@ class Antilink(): # it all makes sense now
     async def on_message(self, message):
         await self.delete_link(message)
 
+    async def on_message(self, message):
+        if self.bot.user in message.mentions: # checks if the bot is pinged or not
+            await ctx.guild.ban(ctx.author, reason="don't ping me again you fucker") # bans the fUCKING PINGER
+            await ctx.send("don't worry guys nothing happend ok cool we cool right yeah cool ok cool bye now") # everything cool right guys?
+
 def setup(bot):
-    bot.add_cog(Antilink(bot))
+    bot.add_cog(Annoying(bot)) # renamed to annoying because i had more than one idea lol
     print("gay mode activated")
