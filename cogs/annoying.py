@@ -15,7 +15,7 @@ class Antilink():
         if re.match(message, self._link_regex):
             try:
                 await message.delete()
-                await message.channel.send(f'{message.author.mention}, lol i'm annoting right yes thats my purpose stupid')
+                await message.channel.send(f'{message.author.mention}, lol i\'m annoying right? yes that\'s my purpose you dumbass')
             except:
                 pass
 
